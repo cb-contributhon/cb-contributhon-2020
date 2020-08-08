@@ -46,9 +46,10 @@
       포트	프로토콜	소스	launch-wizard-6
       8080	tcp	0.0.0.0/0	
       
-  - 기존 VM 설정 중 Go 환경변수 변경: GOROOT 설정 삭제(.bashrc 수정)
-      - $ export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin;
-      - 적용 위해서 $ source .bashrc 실행
+  - 기존 VM 설정 중 Go 환경변수 변경: $GOROOT 설정 제거
+      - .bashrc 추가했었던 GO 관련 설정을 다음 줄로 교체
+        - export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin;
+      - 적용 위해서 logout 후 다시 login
  
   - 환경변수 설정: Log 설정 파일 위치 지정
     - $ export CBLOG_ROOT=/home/ubuntu/go/src/github.com/cb-contributhon/cb-contributhon-2020/w1/rest-server
