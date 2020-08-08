@@ -1,6 +1,7 @@
 // Rest Runtime Server for CB-Contributhon Edu.
 //
 //      * Cloud-Barista: https://github.com/cloud-barista
+//      * CB-Contributhon: https://github.com/cb-contributhon
 //
 // by powerkim, 2020.08.
 
@@ -25,14 +26,14 @@ func init() {
         logger = cblog.GetLogger("CB-Contributhon")
 }
 
-// REST API Return struct for boolena type
+// REST API Return struct for Test
 //====================================================================
 type MyInfo struct {
         Name string `json:"name"`
         Github string `json:"github"`
 }
 
-//ex) {"POST", "/driver", registerCloudDriver}
+// ex) {"POST", "/driver", registerCloudDriver}
 type route struct {
         method, path string
         function     echo.HandlerFunc
@@ -44,23 +45,21 @@ func main() {
         routes := []route{
 
                 //----------MyInfo
-                //{"GET", "/driver/:DriverName", getCloudDriver},
                 {"GET", "/2020/myinfo", getMyInfo},
                 /*
                 {"POST", "/driver", registerCloudDriver},
                 {"GET", "/driver", listCloudDriver},
+                {"GET", "/driver/:DriverName", getCloudDriver},
                 {"DELETE", "/driver/:DriverName", unRegisterCloudDriver},
-
                 */
-                //-------------------------------------------------------------------//
         }
         //======================================= setup routes
 
-        fmt.Println("\n[CB-Contributhon:Test REST Framework]")
-        fmt.Println("\n   Initiating REST Server....__^..^__....\n\n")
-
         // Run REST Server
         ApiServer(routes, ":8080")
+
+        fmt.Println("\n[CB-Contributhon:Test REST Framework]")
+        fmt.Println("\n   Initiialized REST Server....__^..^__....\n\n")
 }
 
 //================ REST Server: setup & start
@@ -93,7 +92,7 @@ func ApiServer(routes []route, strPort string) {
         e.Logger.Fatal(e.Start(strPort))
 }
 
-//================ List of support CloudOS
+//================ Get Myinfo Service
 func getMyInfo(c echo.Context) error {
         logger.Info("call getMhyInfo()")
 
