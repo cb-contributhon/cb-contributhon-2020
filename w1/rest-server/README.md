@@ -45,8 +45,16 @@
     - 참고
       포트	프로토콜	소스	launch-wizard-6
       8080	tcp	0.0.0.0/0	
-	- 환경변수 설정: Log 설정 파일 위치 지정
-    - $ export CBLOG_ROOT=/home/ubuntu/cb-contributhon-2020/w1/rest-server
+      
+  - 기존 VM 설정 중 Go 환경변수 변경: GOROOT 설정 삭제(.bashrc 수정)
+      - $ export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin;
+      - 적용 위해서 $ source .bashrc 실행
+ 
+  - 환경변수 설정: Log 설정 파일 위치 지정
+    - $ export CBLOG_ROOT=/home/ubuntu/go/src/github.com/cb-contributhon/cb-contributhon-2020/w1/rest-server
+    - 반복 사용 위해서는 .bashrc 끝에 추가
+      - 적용 위해서 $ source .bashrc 실행
+
 
 ### (4) REST 서버 가동
   - 서비스 가동 시도
@@ -69,7 +77,7 @@
   - 필요 package import
     - 다음처럼 실행: 
     - $ go get `go run myserver.go 2>&1 |grep cannot |awk '{print $5}' | sed 's/"//g'`
-      - 출력(무시): go get: no install location for directory /home/ubuntu/w1/rest-server outside GOPATH
+      - 출력무시: go get: no install location for directory /home/ubuntu/w1/rest-server outside GOPATH
   - 서비스 가동 재시도
 	- $ go run myserver.go
   - 다음 메시지 출력이면 성공: 안되면 slack 문의
