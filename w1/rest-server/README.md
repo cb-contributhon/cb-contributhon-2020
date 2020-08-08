@@ -76,8 +76,10 @@
 
   - 필요 package import
     - 다음처럼 실행: 
+```    
     - $ go get `go run myserver.go 2>&1 |grep cannot |awk '{print $5}' | sed 's/"//g'`
       - 출력무시: go get: no install location for directory /home/ubuntu/w1/rest-server outside GOPATH
+```      
   - 서비스 가동 재시도
 	- $ go run myserver.go
   - 다음 메시지 출력이면 성공: 안되면 slack 문의
