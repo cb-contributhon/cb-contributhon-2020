@@ -33,13 +33,7 @@
   - 소스 수정 및 시험 반복을 통한 분석
   - 소스 설명: 차주 미팅 
   
-### (2) REST 서버 소스 다운로드
-  - go get 이용한 저장소 다운로드
-	  - $ go get -u github.com/cb-contributhon/cb-contributhon-2020
-  - 다운로드 받은 저장소 위치로 이동
-	  - $ cd $GOPATH/src/github.com/cb-contributhon/cb-contributhon-2020
-
-### (3) 실행 환경 설정
+### (2) 실행 환경 설정
   - VM1 보안그룹(SecurityGroup) 설정
     - 8080 port inbound 추가
     - 참고
@@ -50,7 +44,12 @@
       - .bashrc 추가했었던 GO 관련 설정을 다음 줄로 교체
         - export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin;
       - 적용 위해서 logout 후 다시 login
- 
+
+### (3) REST 서버 소스 다운로드
+  - go get 이용한 저장소 다운로드
+	  - $ go get -u github.com/cb-contributhon/cb-contributhon-2020
+  - 다운로드 받은 저장소 위치로 이동
+	  - $ cd $GOPATH/src/github.com/cb-contributhon/cb-contributhon-2020
   - 환경변수 설정: Log 설정 파일 위치 지정
     - $ export CBLOG_ROOT=/home/ubuntu/go/src/github.com/cb-contributhon/cb-contributhon-2020/w1/rest-server
     - 반복 사용 위해서는 .bashrc 끝에 추가
