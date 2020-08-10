@@ -42,10 +42,12 @@
       8080	tcp	0.0.0.0/0	
       ```
       
-  - 기존 VM 설정 중 Go 환경변수 변경: $GOROOT 설정 제거
+  - 기존 VM 설정 중 Go 환경변수 변경: ~$GOROOT 설정 제거~
+      - mkdir $HOME/gosrc
       - .bashrc 추가했었던 GO 관련 설정을 다음 줄로 교체
-        - export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin;
+        - export GOPATH=$HOME/gosrc;GOROOT=$HOME/go;export PATH=$PATH:$GOROOT/bin;
       - 적용 위해서 logout 후 다시 login
+      - 참고: Go 환경 설정 방법(최신 gist): https://gist.github.com/powerkimhub/d1d6b260228746e14151685bbf2cdf03
 
 ### (3) REST 서버 소스 다운로드
   - go get 이용한 저장소 다운로드
