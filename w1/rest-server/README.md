@@ -37,8 +37,10 @@
   - VM1 보안그룹(SecurityGroup) 설정
     - 8080 port inbound 추가
     - 참고
+      ```
       포트	프로토콜	소스	launch-wizard-6
       8080	tcp	0.0.0.0/0	
+      ```
       
   - 기존 VM 설정 중 Go 환경변수 변경: $GOROOT 설정 제거
       - .bashrc 추가했었던 GO 관련 설정을 다음 줄로 교체
