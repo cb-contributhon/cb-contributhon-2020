@@ -45,10 +45,10 @@
   - 기존 VM 설정 중 Go 환경변수 변경: ~$GOROOT 설정 제거~
       - mkdir $HOME/gosrc
       - .bashrc 추가했었던 GO 관련 설정을 다음으로 교체
-      ```      
+      ```
         export GOPATH=$HOME/gosrc;
-	export GOROOT=$HOME/go; export PATH=$PATH:$GOROOT/bin;
-      ```	
+        export GOROOT=$HOME/go; export PATH=$PATH:$GOROOT/bin;
+      ```
       - 적용 위해서 logout 후 다시 login
       - 참고: Go 환경 설정 방법(최신 gist): https://gist.github.com/powerkimhub/d1d6b260228746e14151685bbf2cdf03
 
