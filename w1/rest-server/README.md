@@ -55,7 +55,7 @@
   - 다운로드 받은 저장소 위치로 이동
 	  - $ cd $GOPATH/src/github.com/cb-contributhon/cb-contributhon-2020
   - 환경변수 설정: Log 설정 파일 위치 지정
-    - $ export CBLOG_ROOT=/home/ubuntu/go/src/github.com/cb-contributhon/cb-contributhon-2020/w1/rest-server
+    - $ export CBLOG_ROOT=/home/ubuntu/gosrc/src/github.com/cb-contributhon/cb-contributhon-2020/w1/rest-server
     - 반복 사용 위해서는 .bashrc 끝에 추가
       - 적용 위해서 $ source .bashrc 실행
 
