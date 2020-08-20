@@ -140,11 +140,14 @@ package _/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-con
         /home/byoungseob/gosrc/src/_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf (from $GOPATH)
 
 
-<2020.08.19.현재 수정 필요한 package dependency>
+### 2020.08.19.현재 수정 필요한 package dependency
+
 ==================
 	성공환경 활용 pkg path에서 실행> git show
 	설치환경 pkg path에서 실행> git checkout 7dc0a2d6ddce55257ea8851e23b4fb9ef44fd4a0
 ==================
+```
+
 ```
 cd $GOPATH/src/github.com/Azure/go-autorest;
 git checkout tags/autorest/azure/auth/v0.4.2; 
