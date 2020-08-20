@@ -141,7 +141,7 @@ package _/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-con
 
 
 ### 2020.08.19.현재 수정 필요한 package dependency
-
+```
 ==================
 	성공환경 활용 pkg path에서 실행> git show
 	설치환경 pkg path에서 실행> git checkout 7dc0a2d6ddce55257ea8851e23b4fb9ef44fd4a0
