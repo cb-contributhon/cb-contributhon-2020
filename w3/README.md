@@ -6,9 +6,9 @@
 ***
 
 # [환경 준비]
-## [사전 준비]
+## 1. 사전 준비
 ```
-       (1) GCP-VM1: 아래 VM 사양 참조 후 신규 생성
+       (1) GCP-VM1: 아래 VM1 설정 참조 후 신규 생성
            - 목적: CB-Spider 설치/가동, CLI 시험
            - VM1 로그인 위한 접속 Key 및 Terminal
        (2) AWS 계정의 Credential 정보(지난 미션시 생성한거 활용)
@@ -17,7 +17,7 @@
             - 목적: CB-Spider AdminWeb 접속
 ```
 
-## [VM1 준비]
+## 2. VM1 설정
 ```
   - OS:  Ubuntu 18.04
   - 사양: 2 vCPU, 4GB, 20GB Disk 이상
@@ -32,8 +32,8 @@
 ***
 
 # [CB-Spider 서버 가동]
-  - 1. Docker기반 가동 방법
-  - 2. 소스기반 가동 방법
+## 1. Docker기반 가동 방법
+## 2. 소스기반 가동 방법
 
 ## 1. Docker 기반 가동
 ### (1) Docker 설치
@@ -151,11 +151,12 @@ rm -rf $GOPATH/src/github.com/docker/docker/vendor/github.com/pkg;
 rm -rf $GOPATH/src/go.etcd.io/etcd/vendor/golang.org/x/net/trace;
 ```
 
-### (5) vi ~/.bashrc  // 끝에 추가하고 source .bashrc 또는 나갔다 들옴.
+### (5) vi ~/.bashrc  // 끝에 다음 2줄을 추가하고 source .bashrc 또는 나갔다 들옴.
 alias spider='cd /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider'
 source /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
 
 ### (6) 소스 기반 CB-Spider 서버 가동
+
 #### 1. sudo docker stop cb-spider    // docker로 서버 가동 중이면, Spider 서버 컨테이너 종료
 #### 2. cd $CBSPIDER_ROOT/api-runtime  // api-runtime 위치로 이동
 #### 3. go run *.go                     // cb-spider 서버 가동
@@ -177,8 +178,7 @@ source /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
     - spider 서버 가동
 
 ## 2. CLI 이용한 활용: 다른 Terminal에서 실행
-  - 본 가이드의 CB-Spider 소스 기반 설치 완료 후 CLI 활용
-    - [소스기반 설치실행](#소스기반-설치실행)
+  - 본 가이드의 CB-Spider 소스 기반 설치 완료 후 CLI 활용    
 
 ```
 cd $CBSPIDER_ROOT/interface/cli/spider
