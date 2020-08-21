@@ -1,13 +1,14 @@
-## [개    요]
+# [개    요]
   - Cloud-Barista 활용 실습 기간: 3주 ~ 4주 예상
   - Cloud-Barista 실습 계획: CB-Spider => CB-Tumblebug
   - 3주: CB-Spider 설치/실행/활용
 
 ***
 
-## [환경 준비]
+# [환경 준비]
+## 사전 준비  
 ```
-       (1) GCP-VM1: 아래 그림 참조 후 동일 조건으로 신규 생성
+       (1) GCP-VM1: 아래 VM 사양 참조 후 신규 생성
            - 목적: CB-Spider 설치/가동, CLI 시험
            - VM1 로그인 위한 접속 Key 및 Terminal
        (2) AWS 계정의 Credential 정보(지난 미션시 생성한거 활용)
@@ -15,6 +16,25 @@
        (3) Web Browser : 노트북/데스크탑 등에 설치된 아무 브라우저 가능
             - 목적: CB-Spider AdminWeb 접속
 ```
+
+## [VM1 준비]
+```
+  - OS:  Ubuntu 18.04
+  - 사양: 2 vCPU, 4GB, 20GB Disk 이상
+  - 방화벽(보안그룹):
+    - CB-Spider 서버용: 1024(Rest Server), 2048(gRPC Server) 포트 개발
+    - Nginx Test용: 8080 포트 개방
+
+  - VM1 로그인 후
+  - sudo apt update -y  // 옵션, 필요시 실행
+```
+
+***
+
+# CB-Spider 서버 가동: 
+  - (1)Docker기반 가동
+  - (2)소스기반 가동
+
 ## [Docker 기반 실행]  
 ### (1) Docker 설치
   - sudo apt install -y docker.io
@@ -63,11 +83,10 @@ sudo docker run -p 8080:80 --name web -d nginx
 sudo docker run --rm -p 8080:80 --name web -d nginx
 ```
 
-### (3) Docker 기반 CB-Spider 실행
+### (3) Docker 기반 CB-Spider 서버 실행
 
 ```
-sudo docker run --rm -p 1024:1024 -p 2048:2048  -v /tmp/meta_db:/root/go/src/github.com/cloud-barista/cb-spider/meta_db --name cb-spider cloudbaristahub/cb-spider:v0.2.0-20200820
-(cloudbaristahub:DockerHub임시계정)
+sudo docker run --rm -p 1024:1024 -p 2048:2048  -v /tmp/meta_db:/root/go/src/github.com/cloud-barista/cb-spider/meta_db --name cb-spider cloudbaristaorg/cb-spider:v0.2.0-20200821
  성공시 다음 메시지 출력함
 ```
 ```
@@ -84,19 +103,80 @@ sudo docker run --rm -p 1024:1024 -p 2048:2048  -v /tmp/meta_db:/root/go/src/git
  => grpc server started on :2048
 ```
 
-#### AdminWeb: Browser로 접근
+
+## [소스기반 설치실행]
+
+### go 설치
+참고: https://gist.github.com/powerkimhub/9a722304a14c5af8b3dff56ab064fb43
+
+### gcc 설치
+sudo apt install -y  gcc
+
+### cb-spider 소스 다운로드
 ```
-http://spider-server-publicip:1024/spider/adminweb
+go get -u -v github.com/cloud-barista/cb-spider
+cd $GOPATH/src/github.com/cloud-barista/cb-spider
+go get -u -v -t  ./... 
 ```
 
+- 다음 메시지는 무시
+package _/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf: cannot find package "_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf" in any of:
+        /home/byoungseob/go/src/_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf (from $GOROOT)
+        /home/byoungseob/gosrc/src/_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf (from $GOPATH)
 
-#### CLI: 다른 Terminal에서 실행
+
+### 2020.08.19.현재 수정 필요한 package dependency
+```
+================== 이 부분은 참고만
+	성공환경 활용 pkg path에서 실행> git show
+	설치환경 pkg path에서 실행> git checkout 7dc0a2d6ddce55257ea8851e23b4fb9ef44fd4a0
+==================
+```
+  - 다음 블럭을 복사 후 VM1에서 실행
+```
+cd $GOPATH/src/github.com/Azure/go-autorest;
+git checkout tags/autorest/azure/auth/v0.4.2; 
+cd $GOPATH/src/github.com/Azure/azure-sdk-for-go;
+git checkout tags/v37.2.0;
+cd $GOPATH/src/github.com/docker/docker/vendor/github.com/containerd/containerd/errdefs;
+git checkout dd16f2f21984338565ec8a8a896e7491d8948d93;
+cd $GOPATH/src/github.com/docker/docker/client;
+git checkout f6163d3f7a10c5d01a92bc8b86e204d784b2f6d6
+
+rm -rf $GOPATH/src/github.com/docker/docker/vendor/github.com/docker/go-connections;
+rm -rf $GOPATH/src/github.com/docker/docker/vendor/github.com/pkg;
+rm -rf $GOPATH/src/go.etcd.io/etcd/vendor/golang.org/x/net/trace;
+```
+
+### vi ~/.bashrc  // 끝에 추가하고 source .bashrc 또는 나갔다 들옴.
+alias spider='cd /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider'
+source /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
+
+### 소스 기반 CB-Spider 서버 가동
+#### (1) sudo docker stop cb-spider    // docker로 서버 가동 중이면, Spider 서버 컨테이너 종료
+#### (2) cd $CBSPIDER_ROOT/api-runtime  // api-runtime 위치로 이동
+#### (3) go run *.go                     // cb-spider 서버 가동
+
+***
+
+# CB-Spider 간단 활용
+- Docker 기반 서버 실행 또는 소스 기반 서버 실행 후에 
+#### AdminWeb 이용한 활용: Browser로 접근
+
+  - 접속 링크: http://spider-server-publicip:1024/spider/adminweb
+  - 가이드 참고: https://drive.google.com/file/d/13x8Amdsoq3RabZhNHD1VC933LeYYLX4z/view?usp=sharing
+
+
+#### CLI 이용한 활용: 다른 Terminal에서 실행
+  - 본 가이드의 CB-Spider 소스 기반 설치 완료 후 CLI 활용
+    - [소스기반 설치실행](#소스기반-설치실행)
 
 ```
 cd $CBSPIDER_ROOT/interface/cli/spider
-./spider os list
+go build spider.go  // spider cli build
+./spider os list    // 현재 Spider가 제공하는 CloudOS 목록 제공
 
-cb-spider/interface/cli/spider# ./spider vpc --cname "aws-aws-(ohio)us-east-2-connection-config-01" list
+./spider vpc --cname "aws-aws-(ohio)us-east-2-connection-config-01" list    // cname이 생성한거와 동일한지 확인 필요
 vpc:
 - IId:
     NameId: vpc-01
@@ -121,54 +201,5 @@ vpc:
   KeyValueList: null
 ```
 
-## [Source 기반 설치/실행]
-
-### go 설치
-참고: https://gist.github.com/powerkimhub/9a722304a14c5af8b3dff56ab064fb43
-
-### gcc 설치
-sudo apt install -y  gcc
-
-### cb-spider 소스 다운로드
-```
-go get -u -v github.com/cloud-barista/cb-spider
-cd $GOPATH/src/github.com/cloud-barista/cb-spider
-go get -u -v -t  ./... 
-```
-
-- 다음 메시지는 무시
-package _/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf: cannot find package "_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf" in any of:
-        /home/byoungseob/go/src/_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf (from $GOROOT)
-        /home/byoungseob/gosrc/src/_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf (from $GOPATH)
-
-
-### 2020.08.19.현재 수정 필요한 package dependency
-```
-==================
-	성공환경 활용 pkg path에서 실행> git show
-	설치환경 pkg path에서 실행> git checkout 7dc0a2d6ddce55257ea8851e23b4fb9ef44fd4a0
-==================
-```
-
-```
-cd $GOPATH/src/github.com/Azure/go-autorest;
-git checkout tags/autorest/azure/auth/v0.4.2; 
-cd $GOPATH/src/github.com/Azure/azure-sdk-for-go;
-git checkout tags/v37.2.0;
-cd $GOPATH/src/github.com/docker/docker/vendor/github.com/containerd/containerd/errdefs;
-git checkout dd16f2f21984338565ec8a8a896e7491d8948d93;
-cd $GOPATH/src/github.com/docker/docker/client;
-git checkout f6163d3f7a10c5d01a92bc8b86e204d784b2f6d6
-
-rm -rf $GOPATH/src/github.com/docker/docker/vendor/github.com/docker/go-connections;
-rm -rf $GOPATH/src/github.com/docker/docker/vendor/github.com/pkg;
-rm -rf $GOPATH/src/go.etcd.io/etcd/vendor/golang.org/x/net/trace;
-```
-
-# vi ~/.bashrc
-alias spider='cd /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider'
-source /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
-
-
-
 ## 수고하셨습니다~
+
