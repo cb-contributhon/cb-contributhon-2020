@@ -6,7 +6,7 @@
 ***
 
 # [환경 준비]
-## 사전 준비  
+## [사전 준비]
 ```
        (1) GCP-VM1: 아래 VM 사양 참조 후 신규 생성
            - 목적: CB-Spider 설치/가동, CLI 시험
@@ -31,11 +31,11 @@
 
 ***
 
-# CB-Spider 서버 가동: 
-  - (1)Docker기반 가동
-  - (2)소스기반 가동
+# [CB-Spider 서버 가동]
+  - 1. Docker기반 가동 방법
+  - 2. 소스기반 가동 방법
 
-## [Docker 기반 실행]  
+## 1. Docker 기반 가동
 ### (1) Docker 설치
   - sudo apt install -y docker.io
     
@@ -86,16 +86,18 @@ sudo docker run --rm -p 8080:80 --name web -d nginx
 ### (3) Docker 기반 CB-Spider 서버 실행
 
 ```
-sudo docker run --rm -p 1024:1024 -p 2048:2048  -v /tmp/meta_db:/root/go/src/github.com/cloud-barista/cb-spider/meta_db --name cb-spider cloudbaristaorg/cb-spider:v0.2.0-20200821
- 성공시 다음 메시지 출력함
+sudo docker run --rm -p 1024:1024 -p 2048:2048  -v /tmp/meta_db:/root/go/src/github.com/cloud-barista/cb-spider/meta_db --name cb-spider cloudbaristaorg/cb-spider:v0.2.0-20200821 
 ```
+
+성공시 다음 메시지 출력함
+
 ```
 [CB-Spider:Cloud Info Management Framework]
 
    Initiating REST API Server....__^..^__....
 
 
-▒눊 http server started on [::]:1024
+ => http server started on [::]:1024
 
 [CB-Spider:Cloud Info Management Framework]
    Initiating GRPC API Server....__^..^__....
@@ -104,15 +106,16 @@ sudo docker run --rm -p 1024:1024 -p 2048:2048  -v /tmp/meta_db:/root/go/src/git
 ```
 
 
-## [소스기반 설치실행]
 
-### go 설치
+## 2. 소스기반 가동
+
+### (1) go 설치
 참고: https://gist.github.com/powerkimhub/9a722304a14c5af8b3dff56ab064fb43
 
-### gcc 설치
+### (2) gcc 설치
 sudo apt install -y  gcc
 
-### cb-spider 소스 다운로드
+### (3) cb-spider 소스 다운로드
 ```
 go get -u -v github.com/cloud-barista/cb-spider
 cd $GOPATH/src/github.com/cloud-barista/cb-spider
@@ -125,10 +128,10 @@ package _/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-con
         /home/byoungseob/gosrc/src/_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf (from $GOPATH)
 
 
-### 2020.08.19.현재 수정 필요한 package dependency
+### (4) Spider 개발시 활용한 패키지 버전 수정 필요(2020.08.19.현재)
 ```
 ================== 이 부분은 참고만
-	성공환경 활용 pkg path에서 실행> git show
+	성공환경 활용 pkg path에서 실행> git show   // 개발시 활용한 패키지의 commit 버전을 복사
 	설치환경 pkg path에서 실행> git checkout 7dc0a2d6ddce55257ea8851e23b4fb9ef44fd4a0
 ==================
 ```
@@ -148,26 +151,32 @@ rm -rf $GOPATH/src/github.com/docker/docker/vendor/github.com/pkg;
 rm -rf $GOPATH/src/go.etcd.io/etcd/vendor/golang.org/x/net/trace;
 ```
 
-### vi ~/.bashrc  // 끝에 추가하고 source .bashrc 또는 나갔다 들옴.
+### (5) vi ~/.bashrc  // 끝에 추가하고 source .bashrc 또는 나갔다 들옴.
 alias spider='cd /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider'
 source /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
 
-### 소스 기반 CB-Spider 서버 가동
-#### (1) sudo docker stop cb-spider    // docker로 서버 가동 중이면, Spider 서버 컨테이너 종료
-#### (2) cd $CBSPIDER_ROOT/api-runtime  // api-runtime 위치로 이동
-#### (3) go run *.go                     // cb-spider 서버 가동
+### (6) 소스 기반 CB-Spider 서버 가동
+#### 1. sudo docker stop cb-spider    // docker로 서버 가동 중이면, Spider 서버 컨테이너 종료
+#### 2. cd $CBSPIDER_ROOT/api-runtime  // api-runtime 위치로 이동
+#### 3. go run *.go                     // cb-spider 서버 가동
 
 ***
 
-# CB-Spider 간단 활용
-- Docker 기반 서버 실행 또는 소스 기반 서버 실행 후에 
-#### AdminWeb 이용한 활용: Browser로 접근
+# CB-Spider 간단 활용 방법
+- Docker 기반 서버 가동 또는 소스 기반 서버 가동 후에 실행
+
+## 1. AdminWeb 이용한 활용: Browser로 접근
 
   - 접속 링크: http://spider-server-publicip:1024/spider/adminweb
   - 가이드 참고: https://drive.google.com/file/d/13x8Amdsoq3RabZhNHD1VC933LeYYLX4z/view?usp=sharing
+  - AWS 대상으로 시험 추천(검증이 많이 됨, 아직 불안할 수도 있음^^)
+    - CB-Spider로 생성한 자원은 가급적 CB-Spider로 삭제
+  - CB-Spider 메타 정보 초기화 방법
+    - spider 서버 종료
+    - rm -rf $CBSPIDER_ROOT/meta_db/dat
+    - spider 서버 가동
 
-
-#### CLI 이용한 활용: 다른 Terminal에서 실행
+## 2. CLI 이용한 활용: 다른 Terminal에서 실행
   - 본 가이드의 CB-Spider 소스 기반 설치 완료 후 CLI 활용
     - [소스기반 설치실행](#소스기반-설치실행)
 
