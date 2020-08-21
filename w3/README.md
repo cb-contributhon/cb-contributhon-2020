@@ -130,9 +130,11 @@ vpc:
 sudo apt install -y  gcc
 
 ### cb-spider 소스 다운로드
+```
 go get -u -v github.com/cloud-barista/cb-spider
 cd $GOPATH/src/github.com/cloud-barista/cb-spider
 go get -u -v -t  ./... 
+```
 
 - 다음 메시지는 무시
 package _/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf: cannot find package "_/home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/cloud-control-manager/cloud-driver/drivers/gcp/main/old/conf" in any of:
