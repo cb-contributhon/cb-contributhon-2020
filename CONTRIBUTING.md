@@ -40,13 +40,13 @@
 
 ## 컨트리뷰션 학습 가이드 및 절차 
 
-### 1.저장소 Fork - 웹브라우저(http://www.github.com)
+### 1. 저장소 Fork - 웹브라우저(http://www.github.com)
   - 개인 계정으로 Github 로그인 
   - https://github.com/cb-contributhon/cb-contributhon-2020 저장소로 이동
   - cb-contributhon-2020 저장소를 개인 계정으로 fork해옴 (우측 상단 메뉴 참고)
   - 보조PPT: 2-3 page 참고
 
-### 2.개인 저장소 Clone 및 환경 설정 - Terminal: git command
+### 2. 개인 저장소 Clone 및 환경 설정 - Terminal: git command
   - 개발 환경으로 로그인(GCP-VM1 등)
   - 원하는 경로 생성 후 fork된 저장소를 clone해옴
     - 계정 수정 필수: 이후 'powerkimhub'를 => 자신의 Github 계정으로 수정 후 실행
@@ -81,7 +81,7 @@
       upstream        https://github.com/cb-contributhon/cb-contributhon-2020.git (push)
     ```
 
-### 3.작업 브랜치 생성 - Terminal: git command
+### 3. 작업 브랜치 생성 - Terminal: git command
   - 현재 브랜치 확인
 
     ` $ git branch`
@@ -105,11 +105,11 @@
   - 브랜치 생성 완료 후 Github 참고
     - 보조PPT: 4-5 page 참고
 
-### 4.개발 및 테스트 - Terminal: vi, go, VSCoode 등
+### 4. 개발 및 테스트 - Terminal: vi, go, VSCoode 등
   - 문서/소스 등 수정/추가/삭제 등 개발 
   - 소스 경우 자체 빌드 및 테스트로 무결성 확인 필수
 
-### 5.Staging & Commit - Terminal: git command
+### 5. Staging & Commit - Terminal: git command
   - Staging: 수정된 여러개의 파일들 중 commit 대상을 선택하는 작업
     - 개인 테스트를 위한 환경 설정(특히 credential 정보가 포함된)이나 
       임시 파일들이 올라 가지 않도록 선별 가능
@@ -179,7 +179,7 @@
       nothing to commit, working tree clean
     ```
 
-### 6.Fetch & Push - Terminal: git command
+### 6. Fetch & Push - Terminal: git command
   - 기여 대상 저장소의 최신 버전을 fetch하여 개인 저장소로 받아옴 [필수:생략하면 안됨]
     - fork 이후 대상 저장소 변경 사항을 fetch 하여 최신 버전에 자신의 변경 내용을 반영하기 위한 사전 작업
 
@@ -215,7 +215,7 @@
        * [new branch]      feature-add-new-idea -> feature-add-new-idea
     ```
 
-### 7.PR(pull requests) 요청 - 웹브라우저(http://www.github.com)
+### 7. PR(pull requests) 요청 - 웹브라우저(http://www.github.com)
   - 개인 계정으로 Github 로그인   
   - Github의 fork 받아 온 repository에 접속하면, “Compare & pull request”가 활성화 되어 있음 
     - 보조PPT: 6 page 참고
@@ -226,7 +226,7 @@
   - 기여 대상 저장소 'Pull requests'에서 생성된 PR 확인
     - 보조PPT: 8 page 참고
 
-### 8.Review & Merge - 웹브라우저(http://www.github.com)    
+### 8. Review & Merge - 웹브라우저(http://www.github.com)    
 #### * 참고: 이하 Reviewer/Approver Role, 이번 학습에서는 제외
   - 리뷰어/승인자는 PR 내용 확인 후 의견 제시
     - 리뷰어/승인자의 PR 수정 요청 시 PR 업데이트 수행
