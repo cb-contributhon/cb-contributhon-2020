@@ -1,4 +1,4 @@
-# [개    요]
+## [개    요]
   - Cloud-Barista 활용 실습 기간: 3주 ~ 4주 예상
   - Cloud-Barista 실습 계획: CB-Spider => CB-Tumblebug
   - 3주: CB-Spider 설치/실행/활용
