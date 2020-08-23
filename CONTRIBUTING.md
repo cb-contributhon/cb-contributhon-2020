@@ -24,7 +24,7 @@
 
 ***
 
-## [W3:Mission-1] Github Contribution 이해 및 PR 실습 - 마감: 8/25(화)
+## [W3:Mission-1] Github 활용 및 PR 실습 - 마감: 8/25(화)
   - 미션: {githubID}.txt 파일 생성 후 PR 요청(세부 내용 아래 가이드 및 절차 참고)
   - 당초계획: Github PR 실습과 CB-Spider API 실습을 통합한 미션이었습니다만,
   - 둘다 처음이신 분들은 너무 복잡한 듯하여, 
