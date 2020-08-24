@@ -152,14 +152,28 @@ rm -rf $GOPATH/src/go.etcd.io/etcd/vendor/golang.org/x/net/trace;
 ```
 
 ### (5) vi ~/.bashrc  // 끝에 다음 2줄을 추가하고 source .bashrc 또는 나갔다 들옴.
-alias spider='cd /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider'
-source /home/byoungseob/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
+```
+alias spider='cd $HOME/gosrc/src/github.com/cloud-barista/cb-spider'
+source $HOME/gosrc/src/github.com/cloud-barista/cb-spider/setup.env
+```
 
 ### (6) 소스 기반 CB-Spider 서버 가동
 
-#### 1. sudo docker stop cb-spider    // docker로 서버 가동 중이면, Spider 서버 컨테이너 종료
-#### 2. cd $CBSPIDER_ROOT/api-runtime  // api-runtime 위치로 이동
-#### 3. go run *.go                     // cb-spider 서버 가동
+#### 1. Stop cb-spider continaer
+Docker 컨테이너로 서버 가동 중이면, Spider 서버 컨테이너 종료
+```
+sudo docker stop cb-spider
+```
+#### 2. Change directory to api-runtime
+api-runtime 위치로 이동
+```
+cd $CBSPIDER_ROOT/api-runtime
+```
+#### 3. Run cb-spider server
+cb-spider 서버 가동
+```
+go run *.go
+```
 
 ***
 
