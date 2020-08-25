@@ -1,0 +1,6 @@
+이름: 고정완
+gitHub ID: ghojeong
+
+<W3:Mission-1> Github 활용 및 PR 실습
+
+참고: https://github.com/cb-contributhon/cb-contributhon-2020/blob/master/CONTRIBUTING.md
