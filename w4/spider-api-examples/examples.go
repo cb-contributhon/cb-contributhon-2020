@@ -393,7 +393,7 @@ func CIM_IOFormat_Test() {
     log.Error(err)
   }
   doc := `{
-          "DriverName":"aws-driver01"
+          "DriverName":"aws-driver-01"
   }`
   result, err := cim.GetCloudDriver(doc)
   if err != nil {
@@ -422,7 +422,7 @@ func CIM_IOFormat_Test() {
     log.Error(err)
   }
   doc = `
-          DriverName: aws-driver01
+          DriverName: aws-driver-01
         `
   result, err = cim.GetCloudDriver(doc)
   if err != nil {
