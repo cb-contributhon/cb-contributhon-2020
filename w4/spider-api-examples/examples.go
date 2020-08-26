@@ -110,7 +110,7 @@ func init() {
 
   var connInfoTestData = []ConnectionInfoTestData {
     { // for AWS
-      "aws-driver01", "aws-driver-v1.0.so", // driver
+      "aws-driver-01", "aws-driver-v1.0.so", // driver
       "aws-credential-01", AWSCredentialList, // credential
       "aws-(ohio)us-east-2", "us-east-2", "us-east-2a", // region, zone
       connConfigNameList[0], // connection config
