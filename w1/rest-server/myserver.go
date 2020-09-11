@@ -59,7 +59,7 @@ func main() {
         ApiServer(routes, ":8080")
 
         fmt.Println("\n[CB-Contributhon:Test REST Framework]")
-        fmt.Println("\n   Initiialized REST Server....__^..^__....\n\n")
+        fmt.Println("\n   Initialized REST Server....__^..^__....\n\n")
 }
 
 //================ REST Server: setup & start
@@ -94,7 +94,7 @@ func ApiServer(routes []route, strPort string) {
 
 //================ Get Myinfo Service
 func getMyInfo(c echo.Context) error {
-        logger.Info("call getMhyInfo()")
+        logger.Info("call getMyInfo()")
 
         myInfo := MyInfo {"powerkim", "powerkimhub"}
         return c.JSON(http.StatusOK, &myInfo)
